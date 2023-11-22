@@ -5,7 +5,7 @@ import unittest
 class TestFractions(unittest.TestCase):
 
     def setUp(self):
-        self.zero = [0, 1]  # przed testami
+        self.zero = [0, 1]
 
     def test_add_frac(self):
         self.assertEqual(fracs.add_frac([1, 2], [1, 3]), [5, 6])
