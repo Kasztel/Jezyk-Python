@@ -1,16 +1,9 @@
-# Python program to demonstrate
-# infinite iterators
-# we can pr
-
 import itertools
 import random
 
 counta = 0
 countb = 0
 
-
-
-# for in loop
 print("a)")
 for i in itertools.cycle('01'):
     if counta > 7:
@@ -26,8 +19,6 @@ directions = ['N', 'E', 'W', 'S']
 it = (random.choice(directions) for _ in range(10))
 for i in it:
     print(i, end=", ")
-
-
 
 print()
 print("c)")
