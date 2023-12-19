@@ -1,0 +1,165 @@
+import pygame
+import sys
+import random
+
+pygame.init()
+
+WIDTH, HEIGHT = 600, 400
+BALL_RADIUS = 10
+PADDLE_WIDTH, PADDLE_HEIGHT = 10, 60
+FPS = 60
+
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+
+player_paddle = pygame.Rect(WIDTH - PADDLE_WIDTH - 10, HEIGHT // 2 - PADDLE_HEIGHT // 2, PADDLE_WIDTH, PADDLE_HEIGHT)
+opponent_paddle = pygame.Rect(10, HEIGHT // 2 - PADDLE_HEIGHT // 2, PADDLE_WIDTH, PADDLE_HEIGHT)
+ball = pygame.Rect(WIDTH // 2 - BALL_RADIUS // 2, HEIGHT // 2 - BALL_RADIUS // 2, BALL_RADIUS, BALL_RADIUS)
+ball_speed = [4 * random.choice((1, -1)), 4 * random.choice((1, -1))]
+speed = 5
+player_points = 0
+opponent_points = 0
+game_option = 0
+
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Atari Pong")
+
+
+def ending_sequence(temp):
+    font = pygame.font.Font(None, 36)
+    text = font.render(temp, True, WHITE)
+    rect = text.get_rect(center=(WIDTH // 2, HEIGHT // 2 - 20))
+    pygame.draw.rect(screen, WHITE, rect, 2)
+    screen.blit(text, rect)
+    pygame.display.flip()
+    pygame.time.wait(3000)
+
+
+def display_options_box():
+    font = pygame.font.Font(None, 36)
+
+    option1_text = font.render("1 PLAYER", True, WHITE)
+    option2_text = font.render("2 PLAYER", True, WHITE)
+
+    option1_rect = option1_text.get_rect(center=(WIDTH // 2, HEIGHT // 2 - 20))
+    option2_rect = option2_text.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 20))
+
+    pygame.draw.rect(screen, WHITE, option1_rect, 2)
+    pygame.draw.rect(screen, WHITE, option2_rect, 2)
+
+    screen.blit(option1_text, option1_rect)
+    screen.blit(option2_text, option2_rect)
+
+    pygame.display.flip()
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                if option1_rect.collidepoint(mouse_pos):
+                    return 0
+                elif option2_rect.collidepoint(mouse_pos):
+                    return 1
+
+        pygame.time.Clock().tick(FPS)
+
+
+def draw_objects():
+    screen.fill(BLACK)
+    pygame.draw.rect(screen, WHITE, player_paddle)
+    pygame.draw.rect(screen, WHITE, opponent_paddle)
+    pygame.draw.ellipse(screen, WHITE, ball)
+
+    font = pygame.font.Font(None, 36)
+    player_score_text = font.render(str(player_points), True, WHITE)
+    opponent_score_text = font.render(str(opponent_points), True, WHITE)
+
+    screen.blit(player_score_text, (WIDTH - 50, 20))
+    screen.blit(opponent_score_text, (30, 20))
+
+
+def move_player_paddle():
+    global speed
+    global game_option
+
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_UP] and player_paddle.top > 0:
+        player_paddle.y -= speed
+    if keys[pygame.K_DOWN] and player_paddle.bottom < HEIGHT:
+        player_paddle.y += speed
+
+
+def move_opponent_paddle():
+    global speed
+    global game_option
+
+    if game_option == 0:
+        if opponent_paddle.top < ball.y:
+            opponent_paddle.y += speed
+        if opponent_paddle.bottom > ball.y:
+            opponent_paddle.y -= speed
+
+    if game_option == 1:
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_w] and opponent_paddle.top > 0:
+            opponent_paddle.y -= speed
+        if keys[pygame.K_s] and opponent_paddle.bottom < HEIGHT:
+            opponent_paddle.y += speed
+
+
+def move_ball():
+    global ball_speed
+    global player_points
+    global opponent_points
+    ball.x += ball_speed[0]
+    ball.y += ball_speed[1]
+
+    if ball.top <= 0 or ball.bottom >= HEIGHT:
+        ball_speed[1] = -ball_speed[1]
+
+    if ball.colliderect(player_paddle):
+        ball_speed[0] = -ball_speed[0]
+
+    if ball.colliderect(opponent_paddle):
+        ball_speed[0] = -ball_speed[0]
+
+    if ball.right >= WIDTH:
+        opponent_points += 1
+        reset_ball()
+
+    if ball.left <= 0:
+        player_points += 1
+        reset_ball()
+
+
+def reset_ball():
+    ball.center = (WIDTH // 2, HEIGHT // 2)
+    ball_speed[0] = 4 * random.choice((1, -1))
+    ball_speed[1] = 4 * random.choice((1, -1))
+
+
+clock = pygame.time.Clock()
+game_options = display_options_box()
+while True:
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+
+    if player_points == 11 or opponent_points == 11:
+        ending_sequence("END OF GAME")
+        pygame.quit()
+        sys.exit()
+
+    move_player_paddle()
+    move_opponent_paddle()
+    move_ball()
+
+    draw_objects()
+
+    pygame.display.flip()
+    clock.tick(FPS)
