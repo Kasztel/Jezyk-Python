@@ -19,7 +19,6 @@ ball_speed = [4 * random.choice((1, -1)), 4 * random.choice((1, -1))]
 speed = 5
 player_points = 0
 opponent_points = 0
-game_option = 0
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Atari Pong")
@@ -141,8 +140,9 @@ def reset_ball():
     ball_speed[1] = 4 * random.choice((1, -1))
 
 
+game_option = display_options_box()
+
 clock = pygame.time.Clock()
-game_options = display_options_box()
 while True:
 
     for event in pygame.event.get():
