@@ -1,5 +1,3 @@
-### Dokumentacja gry w kółko i krzyżyk
-
 #### Moduł `tictactoe`
 
 ##### Kluczowe zmienne:
