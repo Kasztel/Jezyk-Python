@@ -11,34 +11,34 @@
 
 ##### Funkcje:
 
-1. `initial_state()`
+`initial_state()`
     - Zwraca początkowy stan planszy (pustą planszę).
 
-2. `player(board)`
+`player(board)`
     - Zwraca gracza, który ma kolejny ruch na planszy.
 
-3. `actions(board)`
+`actions(board)`
     - Zwraca zbiór wszystkich możliwych ruchów dostępnych na planszy.
 
-4. `result(board, action)`
+`result(board, action)`
     - Zwraca planszę, która wynika z wykonania ruchu (i, j) na planszy.
 
-5. `winner(board)`
+`winner(board)`
     - Zwraca zwycięzcę gry, jeśli taki istnieje.
 
-6. `terminal(board)`
+`terminal(board)`
     - Zwraca True, jeśli gra się skończyła, False w przeciwnym razie.
 
-7. `utility(board)`
+`utility(board)`
     - Zwraca 1, jeśli gracz X wygrał grę, -1 jeśli gracz O wygrał, 0 w przeciwnym razie.
 
-8. `minimax(board)`
+`minimax(board)`
     - Zwraca optymalny ruch dla bieżącego gracza na planszy.
 
-9. `max_value(board)`
+`max_value(board)`
     - Pomocnicza funkcja dla algorytmu minimax, oblicza wartość maksymalną.
 
-10. `min_value(board)`
+`min_value(board)`
     - Pomocnicza funkcja dla algorytmu minimax, oblicza wartość minimalną.
 
 #### Funkcja `minimax(board)`
