@@ -1,6 +1,6 @@
 #### Moduł `tictactoe`
 
-##### Kluczowe zmienne:
+##### Kluczowe stałe:
 - `X`: Stała reprezentująca gracza X.
 - `O`: Stała reprezentująca gracza O.
 - `EMPTY`: Stała reprezentująca puste pole na planszy.
