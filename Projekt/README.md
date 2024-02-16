@@ -46,5 +46,3 @@
 #### Moduł `runner`
 
 - Odpowiada za interakcję z graczem, logikę gry oraz jej wyświetlanie w interfejsie graficznym przy użyciu biblioteki Pygame.
-
-To jest dokumentacja do kodu gry w kółko i krzyżyk. Zawiera opisy funkcji, stałych i logiki gry potrzebnej do zrozumienia działania gry.
