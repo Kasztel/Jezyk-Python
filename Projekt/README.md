@@ -60,3 +60,7 @@
 #### Moduł `runner`
 
 - Odpowiada za interakcję z graczem, logikę gry oraz jej wyświetlanie w interfejsie graficznym przy użyciu biblioteki Pygame.
+
+### Źródła
+- https://www.geeksforgeeks.org/finding-optimal-move-in-tic-tac-toe-using-minimax-algorithm-in-game-theory/
+- https://cs50.harvard.edu/ai/2020/projects/0/tictactoe/
