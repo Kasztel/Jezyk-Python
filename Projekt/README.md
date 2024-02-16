@@ -43,6 +43,22 @@
 10. `min_value(board)`
     - Pomocnicza funkcja dla algorytmu minimax, oblicza wartość minimalną.
 
+#### Funkcja `minimax(board)`
+
+- **Opis:** Funkcja implementuje algorytm minimax, który służy do znalezienia optymalnego ruchu dla bieżącego gracza na planszy w grze w kółko i krzyżyk. Algorytm przeszukuje drzewo gry, aby znaleźć najlepszy ruch dla danego gracza.
+
+- **Parametry:**
+  - `board`: Aktualny stan planszy gry.
+
+- **Zwracane wartości:**
+  - Zwraca najlepszy ruch dla bieżącego gracza na podstawie analizy drzewa gry.
+
+- **Algorytm:**
+  - Funkcja `minimax()` przeszukuje drzewo gry rekurencyjnie, aby znaleźć optymalny ruch.
+  - Jeśli gracz to X, funkcja próbuje maksymalizować wynik, szukając ruchu, który zapewni najwyższy możliwy wynik.
+  - Jeśli gracz to O, funkcja próbuje zminimalizować wynik, szukając ruchu, który zapewni najniższy możliwy wynik.
+  - Algorytm korzysta z dwóch pomocniczych funkcji: `max_value()` i `min_value()`, które obliczają odpowiednio wartość maksymalną i minimalną dla danego stanu gry.
+
 #### Moduł `runner`
 
 - Odpowiada za interakcję z graczem, logikę gry oraz jej wyświetlanie w interfejsie graficznym przy użyciu biblioteki Pygame.
